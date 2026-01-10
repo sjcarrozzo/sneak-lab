@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <ItemListContainer text="Texto recibido por props" />
+      <ItemListContainer userName="User123" />
     </>
   );
 }
