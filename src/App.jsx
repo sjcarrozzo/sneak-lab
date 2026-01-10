@@ -1,12 +1,13 @@
-import { useState } from 'react'
+import Navbar from "./components/Navbar";
+import ItemListContainer from "./components/ItemListContainer";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
+      <Navbar />
+      <ItemListContainer text="Texto recibido por props" />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
