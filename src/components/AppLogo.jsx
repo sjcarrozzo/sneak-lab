@@ -5,7 +5,7 @@ function AppLogo() {
         x="0"
         y="35"
         fontFamily="Arial, Helvetica, sans-serif"
-        fontSize="45"
+        fontSize="50"
       >
         <tspan fill="#595653ff" fontWeight="300">
           Sneak

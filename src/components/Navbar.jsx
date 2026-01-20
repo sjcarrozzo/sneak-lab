@@ -1,3 +1,6 @@
+//react imports
+import { useState } from "react";
+
 //@mui imports
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -9,8 +12,16 @@ import Box from "@mui/material/Box";
 //local imports
 import CartWidget from "./CartWidget";
 import AppLogo from "./AppLogo";
+import MobileDrawer from "./MobileDrawer";
+import { navLinks } from "@/data/navLinks";
 
 export default function Navbar() {
+  //manage toggle menu state
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <AppBar position="static">
       <Toolbar
@@ -23,25 +34,24 @@ export default function Navbar() {
           edge="start"
           color="inherit"
           aria-label="menu"
-          sx={{ mr: 2 }}
+          onClick={handleOpen}
+          sx={{ display: { md: "none" } }}
         >
           <MenuIcon />
         </IconButton>
         <AppLogo />
 
-        <Box sx={{ display: "flex", gap: 2 }}>
-          <Button variant="navbar-button">Hot Deals!🔥</Button>
-          <Button variant="navbar-button">Genre</Button>
-          <Button variant="navbar-button">Casual</Button>
-          <Button variant="navbar-button">Running</Button>
-          <Button variant="navbar-button">Training</Button>
-          <Button variant="navbar-button">Brands</Button>
+        <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
+          {navLinks.map((link) => {
+            return <Button variant="navbar-button">{link}</Button>;
+          })}
         </Box>
 
         <Box sx={{ flexGrow: 1 }} />
 
         <CartWidget />
       </Toolbar>
+      <MobileDrawer open={open} onClose={handleClose} />
     </AppBar>
   );
 }
