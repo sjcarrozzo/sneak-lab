@@ -1,16 +1,17 @@
 //@mui imports
-import { Container, Typography } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 
 function Footer() {
   return (
-    <Container>
+    <Box sx={{width:"100%", display: "flex", justifyContent:"center"}}>
       <Typography
         variant="h6"
-        sx={{ fontWeight: 700, mb: 2, pt: 10, textAlign: "center" }}
+        sx={{ fontWeight: 300, py: 3, textAlign: "center", backgroundColor: "#F3F3F3",width:"100%" }}
       >
-        SC Design 2026
+        © 2026 Sebastian Carrozzo. <br></br>
+        Frontend & Backend Javascript Developer
       </Typography>
-    </Container>
+    </Box>
   );
 }
 

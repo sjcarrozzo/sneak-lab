@@ -1,3 +1,4 @@
+//react imports
 import { createRoot } from "react-dom/client";
 
 //@mui imports
@@ -16,5 +17,5 @@ createRoot(document.getElementById("root")).render(
   <ThemeProvider theme={theme}>
     <CssBaseline />
     <App />
-  </ThemeProvider>
+  </ThemeProvider>,
 );

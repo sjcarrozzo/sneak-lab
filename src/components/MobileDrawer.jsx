@@ -1,3 +1,7 @@
+//react imports
+import { useState } from "react";
+import { Link } from "react-router";
+
 //@mui imports
 import {
   Drawer,
@@ -6,28 +10,72 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  Collapse,
 } from "@mui/material";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
 
 //local imports
 import { navLinks } from "@/data/navLinks";
 
-function MobileDrawer({ open, onClose }) {
+function MobileDrawer({ openMenu, onCloseMenu }) {
+  const [openDropdown, setOpenDropdown] = useState(null);
+
+  const handleToggle = (label) => {
+    setOpenDropdown(openDropdown === label ? null : label);
+  };
+
   return (
-    <Drawer anchor="left" open={open} onClose={onClose}>
-      <Box
-        sx={{ width: 250 }}
-        role="presentation"
-        onClick={onClose}
-        onKeyDown={onClose}
-      >
+    <Drawer anchor="left" open={openMenu} onClose={onCloseMenu}>
+      <Box sx={{ width: 250 }}>
         <List>
-          {navLinks.map((link) => (
-            <ListItem key={link} disablePadding>
-              <ListItemButton>
-                <ListItemText primary={link} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          {navLinks.map((link) => {
+            // DROPDOWN
+            if (link.type === "dropdown") {
+              const isOpen = openDropdown === link.label;
+
+              return (
+                <Box key={link.label}>
+                  <ListItem disablePadding>
+                    <ListItemButton onClick={() => handleToggle(link.label)}>
+                      <ListItemText primary={link.label} />
+                      {isOpen ? <ExpandLess /> : <ExpandMore />}
+                    </ListItemButton>
+                  </ListItem>
+
+                  <Collapse in={isOpen} timeout="auto" unmountOnExit>
+                    <List component="div" disablePadding>
+                      {link.subLinks.map((sublink) => (
+                        <ListItemButton
+                          component={Link}
+                          to={`/${link.label}/${sublink}`}
+                          key={sublink}
+                          sx={{ pl: 4 }}
+                          onClick={onCloseMenu}
+                        >
+                          <ListItemText primary={sublink} />
+                        </ListItemButton>
+                      ))}
+                    </List>
+                  </Collapse>
+                </Box>
+              );
+            }
+
+            // LINK NORMAL
+            return (
+              <ListItem
+                component={Link}
+                to={`/category/${link.label}`}
+                key={link.label}
+                disablePadding
+              >
+                <ListItemButton onClick={onCloseMenu}>
+                  <ListItemText sx={{color: "black"}}primary={link.label} />
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
         </List>
       </Box>
     </Drawer>
