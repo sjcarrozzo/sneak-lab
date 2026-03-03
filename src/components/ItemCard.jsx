@@ -1,17 +1,8 @@
 //@mui imports
-import {
-  Card,
-  CardContent,
-  Typography,
-  Rating,
-  CardMedia,
-  Button,
-  Box,
-} from "@mui/material";
+import { Card,CardContent,Typography,Rating,CardMedia,Button,Box} from "@mui/material";
 
 import {Link} from "react-router";
 
-// function ItemCard({ id, name, price, image }) {
 function ItemCard({product}) {
 
   return (
@@ -27,7 +18,7 @@ function ItemCard({product}) {
         <CardMedia
           sx={{ mb: 4 }}
           component="img"
-          image={product.img}
+          image={product.url}
           alt="sneaker description"
         />
         <Box>

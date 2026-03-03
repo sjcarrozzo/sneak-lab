@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 
 //local imports
 import ItemDetail from "./ItemDetail";
-import { fetchProductById } from "@/data/fakeApi";
+import { fetchProductById } from "../firebase/db"; 
 
 function ItemDetailContainer() {
   const [product, setProduct] = useState(null);

@@ -3,28 +3,30 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 
 //@mui imports
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 
 //local imports
 import ItemList from "./ItemList";
-import { fetchAllProducts, fetchWithParams } from "@/data/fakeApi";
+import { fetchAllProducts, fetchWithParams } from "../firebase/db";
 
 function ItemListContainer() {
   const [productsList, setProductsList] = useState([]);
   const { filterType, filter } = useParams();
 
   useEffect(() => {
-    const fetchedProducts = filterType
-      ? fetchWithParams(filterType, filter)
-      : fetchAllProducts();
 
-    fetchedProducts.then(setProductsList);
+    const fetchedProducts = filterType
+       ? fetchWithParams(filterType, filter)
+       : fetchAllProducts();
+
+    fetchedProducts.then(products => setProductsList(products));
+  
   }, [filterType, filter]);
 
   return (
     <>
-      <Container sx={{ py: 10 }}>
+      <Container sx={{ py: 10,    minHeight: "100vh", }}>
         <Grid container spacing={5}>
           {productsList.length === 0 ? (
             <Box
@@ -32,10 +34,10 @@ function ItemListContainer() {
                 display: "flex",
                 justifyItems: "center",
                 width: "100%",
-                minHeight: "100vh",
+             
               }}
             >
-              <CircularProgress />
+              <CircularProgress/>
             </Box>
           ) : (
             <ItemList productsList={productsList} />

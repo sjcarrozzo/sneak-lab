@@ -1,11 +1,20 @@
+//mui imports
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material/Badge";
+import { Link } from "react-router";
+
+//react imports
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 function CartWidget() {
+  const { getProductsQuantity } = useContext(CartContext);
+  const quantity = getProductsQuantity();
+
   return (
     <Badge
-      badgeContent={3}
+      badgeContent={quantity}
       sx={{
         "& .MuiBadge-badge": {
           backgroundColor: "#e4793fff",
@@ -13,8 +22,8 @@ function CartWidget() {
         },
       }}
     >
-      <IconButton color="inherit" aria-label="cart">
-        <ShoppingCartIcon />
+      <IconButton component={Link} to={"/cart"} color="inherit" aria-label="cart">
+        <ShoppingCartIcon  />
       </IconButton>
     </Badge>
   );

@@ -3,64 +3,72 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+
 import CardActions from "@mui/material/CardActions";
-import { Box, Rating } from "@mui/material";
+import { Box, Rating, Container } from "@mui/material";
 
 //local imports
 import ItemCount from "./ItemCount";
 
 function ItemDetail({ product }) {
+  
   return (
-    <Card
-      sx={{
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        minHeight: "100vh",
-      }}
-    >
-      <CardMedia
-        component="img"
-        image={product.img}
-        alt={product.name}
-        sx={{
-           width: "40%",
-          objectFit: "contain",
-          ml: 10,
-        }}
-      />
-
-      <Box
+    <Container maxWidth="lg" sx={{ mt: 4, minHeight: "100vh" }}>
+      <Card
         sx={{
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          width: "30%",
-          ml: 3,
+          flexDirection: { xs: "column", md: "row" },
+          alignItems: "center",
+          p: 2,
         }}
       >
-        <CardContent>
-          <Typography variant="h4">{product.name}</Typography>
-          <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-            {product.description}
-          </Typography>
-          <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-            ¿Te ha gustado este producto? ¡Calificalo!
-          </Typography>
-          <Rating name="half-rating-read" defaultValue={4} sx={{ mb: 2 }} />
-          <Typography variant="h4">${product.price}</Typography>
-        </CardContent>
-        <ItemCount/>
-        <CardActions>
-          <Button variant="contained">Add to Cart</Button>
-        </CardActions>
-      </Box>
-    </Card>
+        <CardMedia
+          component="img"
+          image={product.url}
+          alt={product.name}
+          sx={{
+            width: { xs: "100%", md: "50%" },
+            maxHeight: 400,
+            objectFit: "contain",
+          }}
+        />
 
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            width: { xs: "100%", md: "50%" },
+            p: { xs: 2, md: 4 },
+          }}
+        >
+          <CardContent>
+            <Typography variant="h4" gutterBottom>
+              {product.name}
+            </Typography>
 
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+              {product.description}
+            </Typography>
 
-  )
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+              ¿Te ha gustado este producto? ¡Califícalo!
+            </Typography>
+
+            <Rating defaultValue={4} sx={{ mb: 2 }} />
+
+            <Typography variant="h4" sx={{ mt: 2 }} >
+              ${product.price}
+            </Typography>
+          </CardContent>
+
+          <CardActions>
+            <ItemCount product={product} />
+          </CardActions>
+        </Box>
+      </Card>
+    </Container>
+  );
 }
 
 export default ItemDetail;

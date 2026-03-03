@@ -1,6 +1,6 @@
 //react imports
 import { createRoot } from "react-dom/client";
-
+import CartProvider from "./context/CartProvider.jsx";
 //@mui imports
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -16,6 +16,8 @@ import "@fontsource/roboto/500.css";
 createRoot(document.getElementById("root")).render(
   <ThemeProvider theme={theme}>
     <CssBaseline />
-    <App />
+    <CartProvider>
+      <App />
+    </CartProvider>
   </ThemeProvider>,
 );

@@ -1,5 +1,6 @@
 import { Box, Typography, Button, Container } from '@mui/material';
 import { assets } from '@/assets';
+import { Link } from 'react-router';
 
 function Hero() {
   return (
@@ -70,6 +71,8 @@ function Hero() {
           variant="contained"
           size="large"
           sx={{ width: 'fit-content' }}
+          component={Link}
+          to={'/products'}
         >
           Go Shopping🔥
         </Button>

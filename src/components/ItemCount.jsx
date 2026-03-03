@@ -1,45 +1,80 @@
-import { Box, Typography } from "@mui/material";
-import CardActions from "@mui/material/CardActions";
-import Button from "@mui/material/Button";
+//hot toast import
+import toast from 'react-hot-toast';
 
-import { useState } from "react";
+//mui imports
+import { Box, Typography, CardActions, Button } from "@mui/material";
+import RemoveIcon from "@mui/icons-material/Remove";
+import AddIcon from "@mui/icons-material/Add";
 
-function ItemCount() {
-  const [itemCount, setItemCount] = useState(1);
+//react imports
+import { useState, useContext } from "react";
+import { CartContext } from "../context/CartContext";
+
+function ItemCount({ product }) {
+  const [itemCount, setItemCount] = useState(product.count ? product.count : 1);
+  const { addToCart } = useContext(CartContext);
 
   const handleClickPlus = () => {
     setItemCount(itemCount + 1);
   };
 
   const handleClickMinus = () => {
-    itemCount > 1 ? setItemCount(itemCount - 1) : null;
+    itemCount > 1 ? setItemCount(itemCount - 1) : toast.error('Cantidad no puede ser menor que 1',{duration: 1000, style: {background: "#e7e2e2fb"}});
+  };
+
+  const handleClickAddToCart = () => {
+    addToCart({ ...product, count: itemCount });
+    toast.success('Producto agregado al carrito',{duration: 1000, style: {background: "#e7e2e2fb"}})
   };
 
   return (
-    <CardActions sx={{ mb: 5 }}>
-      <Button
-        size="small"
+    <CardActions >
+      <Box
         sx={{
-          padding: "4px 8px",
-          minWidth: "50px",
+          display: "flex",
+          flexDirection: "column",
         }}
-        variant="contained"
-        onClick={handleClickMinus}
       >
-        -
-      </Button>
-      <Typography variant="h5">{itemCount}</Typography>
-      <Button
-        size="small"
-        sx={{
-          padding: "4px 8px",
-          minWidth: "50px",
-        }}
-        variant="contained"
-        onClick={handleClickPlus}
-      >
-        +
-      </Button>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            mb: 2,
+          }}
+        >
+          <Button
+            size="small"
+            sx={{
+              padding: "4px 8px",
+              minWidth: "50px",
+            }}
+            variant="contained"
+            onClick={handleClickMinus}
+          >
+            <RemoveIcon></RemoveIcon>
+          </Button>
+          <Typography
+            variant="h5"
+            sx={{ minWidth: "50px", textAlign: "center" }}
+          >
+            {itemCount}
+          </Typography>
+          <Button
+            size="small"
+            sx={{
+              padding: "4px 8px",
+              minWidth: "50px",
+            }}
+            variant="contained"
+            onClick={handleClickPlus}
+          >
+            <AddIcon></AddIcon>
+          </Button>
+        </Box>
+        <Button variant="contained" onClick={handleClickAddToCart}>
+          Add to Cart
+        </Button>
+      </Box>
     </CardActions>
   );
 }

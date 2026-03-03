@@ -1,5 +1,5 @@
 //react imports
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
 //@mui imports
@@ -18,7 +18,7 @@ import { styled } from "@mui/material/styles";
 import CartWidget from "./CartWidget";
 import AppLogo from "./AppLogo";
 import MobileDrawer from "./MobileDrawer";
-import { navLinks } from "@/data/navLinks";
+import { fetchAllCategories } from "../firebase/db";
 
 const StyledListHeader = styled(ListSubheader)({
   backgroundImage: "var(--Paper-overlay)",
@@ -29,6 +29,7 @@ export default function Navbar() {
   const [mobileOpen, setOpenMobile] = useState(false);
   const handleOpenMobile = () => setOpenMobile(true);
   const handleCloseMobile = () => setOpenMobile(false);
+  const [ navLinks, setNavLinks ] = useState([])
 
   //manage menu list open
   const [anchorEl, setAnchorEl] = useState(null);
@@ -41,6 +42,10 @@ export default function Navbar() {
     setAnchorEl(null);
   };
 
+  useEffect(()=>{
+    fetchAllCategories().then(categories => setNavLinks(categories)) 
+  },[])
+  
   return (
     <AppBar position="static">
       <Toolbar
