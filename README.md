@@ -1,16 +1,46 @@
-# React + Vite
+# 🚀 SneakLab 👟
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+SneakLab es una aplicación web de catálogo de productos desarrollada con **React**, que utiliza **Firebase Firestore** como backend para el almacenamiento de productos. La aplicación implementa navegación con **React Router**, notificaciones con **React Hot Toast** y un diseño moderno con **Material UI**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠 Tecnologías
 
-## React Compiler
+- **[React](https://reactjs.org/)** – Biblioteca principal para construir la interfaz.
+- **[Firebase / Firestore](https://firebase.google.com/docs/firestore)** – Base de datos en tiempo real para almacenar productos.
+- **[React Router DOM](https://reactrouter.com/en/main)** – Navegación entre páginas.
+- **[React Hot Toast](https://react-hot-toast.com/)** – Notificaciones amigables para el usuario.
+- **[Material UI](https://mui.com/)** – Componentes y estilos modernos.
+- **JavaScript (ES6+)** – Lógica del frontend.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 📦 Funcionalidades
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Visualización de productos desde Firestore.
+- Navegación fluida entre páginas (Home, Productos, Detalles).
+- Notificaciones al agregar, actualizar o eliminar productos al carrito.
+- Interfaz moderna y responsiva con Material UI.
+- Manejo de errores y estados de carga.
+
+---
+
+## ⚡ Instalación
+
+1. Clona el repositorio:
+
+```bash
+git clone https://github.com/tu-usuario/sneaklab.git
+cd sneaklab
+```
+
+2. Instala dependencias:
+
+```bash
+npm install
+```
+3. Ejecución del proyecto:
+
+```bash
+npm run dev
+```

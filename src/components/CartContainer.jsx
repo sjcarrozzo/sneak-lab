@@ -1,15 +1,12 @@
-//mui imports
-// import { Container, Typography, Divider, Button, Box } from "@mui/material";
-
 //react imports
 import { useCart } from "../context/useCart";
+import EmptyCart from "./EmptyCart";
 
 //local imports
- import CartList from "./CartList";
-// import { Link } from "react-router";
+import CartList from "./CartList";
 
 function CartContainer() {
-  const { cart } = useCart();
+  const { cart, resetCart } = useCart();
 
   const totalCart = cart.reduce(
     (acc, product) => acc + product.price * product.count,
@@ -17,7 +14,13 @@ function CartContainer() {
   );
 
   return (
-    <CartList cart={cart} total={totalCart} />
+    <>
+      {cart.length === 0 ? (
+        <EmptyCart/>
+      ) : (
+        <CartList cart={cart} total={totalCart} resetCart={resetCart} />
+      )}
+    </>
   );
 }
 

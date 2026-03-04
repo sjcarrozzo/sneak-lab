@@ -19,12 +19,12 @@ function ItemCount({ product }) {
   };
 
   const handleClickMinus = () => {
-    itemCount > 1 ? setItemCount(itemCount - 1) : toast.error('Cantidad no puede ser menor que 1',{duration: 1000, style: {background: "#e7e2e2fb"}});
+    itemCount > 1 ? setItemCount(itemCount - 1) : toast.error('Quantity cant be less than 1',{duration: 1000, style: {background: "#f7b1b1fb"}});
   };
 
   const handleClickAddToCart = () => {
     addToCart({ ...product, count: itemCount });
-    toast.success('Producto agregado al carrito',{duration: 1000, style: {background: "#e7e2e2fb"}})
+    toast.success('Producto added to cart',{duration: 1000, style: {background: "#e7e2e2fb"}})
   };
 
   return (

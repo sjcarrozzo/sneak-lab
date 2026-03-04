@@ -1,25 +1,22 @@
 //react imports
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router";
 
 //@mui imports
-import {
-  Drawer,
-  Box,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Collapse,
-} from "@mui/material";
+import {Drawer,Box,List,ListItem,ListItemButton,ListItemText,Collapse,} from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 
 //local imports
-import { navLinks } from "@/data/navLinks";
+import { fetchAllCategories } from "../firebase/db";
 
 function MobileDrawer({ openMenu, onCloseMenu }) {
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [navLinks, setNavLinks] = useState([]);
+
+  useEffect(() => {
+    fetchAllCategories().then((categories) => setNavLinks(categories));
+  }, []);
 
   const handleToggle = (label) => {
     setOpenDropdown(openDropdown === label ? null : label);
@@ -71,7 +68,7 @@ function MobileDrawer({ openMenu, onCloseMenu }) {
                 disablePadding
               >
                 <ListItemButton onClick={onCloseMenu}>
-                  <ListItemText sx={{color: "black"}}primary={link.label} />
+                  <ListItemText sx={{ color: "black" }} primary={link.label} />
                 </ListItemButton>
               </ListItem>
             );

@@ -1,63 +1,54 @@
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import toast from "react-hot-toast";
 
-export default function ValidationTextFields() {
-  return (
-    <Box
-      component="form"
-      sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
-      noValidate
-      autoComplete="off"
-    >
-      <div>
-        <TextField
-          error
-          id="outlined-error"
-          label="Error"
-          defaultValue="Hello World"
-        />
-        <TextField
-          error
-          id="outlined-error-helper-text"
-          label="Error"
-          defaultValue="Hello World"
-          helperText="Incorrect entry."
-        />
-      </div>
-      <div>
-        <TextField
-          error
-          id="filled-error"
-          label="Error"
-          defaultValue="Hello World"
-          variant="filled"
-        />
-        <TextField
-          error
-          id="filled-error-helper-text"
-          label="Error"
-          defaultValue="Hello World"
-          helperText="Incorrect entry."
-          variant="filled"
-        />
-      </div>
-      <div>
-        <TextField
-          error
-          id="standard-error"
-          label="Error"
-          defaultValue="Hello World"
-          variant="standard"
-        />
-        <TextField
-          error
-          id="standard-error-helper-text"
-          label="Error"
-          defaultValue="Hello World"
-          helperText="Incorrect entry."
-          variant="standard"
-        />
-      </div>
-    </Box>
-  );
+import { placeOrder } from "../firebase/db";
+import { useCart } from "../context/useCart";
+import { useNavigate } from "react-router";
+
+import EmptyCart from "./EmptyCart";
+import CheckoutForm from "./CheckoutForm";
+
+function Checkout() {
+  const { cart, resetCart } = useCart();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const formData = new FormData(e.currentTarget);
+
+    const order = {
+      name: formData.get("name"),
+      surname: formData.get("surname"),
+      phone: formData.get("phone"),
+      email: formData.get("email"),
+      address: formData.get("address"),
+      cart: cart,
+    };
+
+    try {
+      const orderID = await placeOrder(order);
+
+      toast.success(`Thanks for your purchase.
+        Order placed successfully.
+        Order N°: ${orderID}`, {
+        duration: 3000,
+        style: { background: "#a3f556fb" },
+      });
+      form.reset();
+      resetCart();
+      
+      setTimeout(() => { navigate("/");
+      }, 3000);
+    } catch (error) {
+      toast.error("Error placing your order. Please try again.", {
+        duration: 3000,
+        style: { background: "#f7b1b1fb" },
+      });
+    }
+  };
+
+  return cart.length === 0 ? <EmptyCart /> : <CheckoutForm handleSubmit={handleSubmit}/>;
 }
+
+export default Checkout

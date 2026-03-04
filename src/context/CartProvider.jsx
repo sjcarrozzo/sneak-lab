@@ -9,6 +9,10 @@ function CartProvider({ children }) {
     return cart.some((cartProduct) => cartProduct.id === product.id);
   };
 
+  const resetCart = ()=>{
+    setCart([])
+  }
+
   const addToCart = (product) => {
     if (!existProductInCart(product)) {
       setCart([...cart, product]);
@@ -27,7 +31,7 @@ function CartProvider({ children }) {
     
     const updatedCart = cart.filter( cartProduct => cartProduct.id !== product.id );
     setCart(updatedCart)
-    toast.success('Eliminaste el producto de tu carrito',{duration: 1000, style: {background: "#e7e2e2fb"}})
+    toast.success('Product deleted from cart',{duration: 1000, style: {background: "#e7e2e2fb"}})
 
   };
 
@@ -36,7 +40,7 @@ function CartProvider({ children }) {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, getProductsQuantity,removeFromCart }}>
+    <CartContext.Provider value={{ cart, addToCart, getProductsQuantity,removeFromCart,resetCart }}>
       {children}
     </CartContext.Provider>
   );

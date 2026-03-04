@@ -5,11 +5,11 @@ import { useParams } from "react-router";
 //@mui imports
 import { Box } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
-import Typography from "@mui/material/Typography";
 
 //local imports
 import ItemDetail from "./ItemDetail";
 import { fetchProductById } from "../firebase/db"; 
+import NotFoundProduct from "./NotFoundProduct";
 
 function ItemDetailContainer() {
   const [product, setProduct] = useState(null);
@@ -20,8 +20,12 @@ function ItemDetailContainer() {
     setLoading(true);
 
     fetchProductById(productId).then((data) => {
-      setProduct(data);
+      
+      if(data){
+        setProduct(data);
+      } 
       setLoading(false);
+      
     });
   }, [productId]);
 
@@ -39,12 +43,9 @@ function ItemDetailContainer() {
       </Box>
     );
   }
-
-  if (!product) {
-    return <Typography sx={{minHeight: "100vh", py:10, textAlign:"center"}} variant="h5">Producto no encontrado</Typography>;
-  }
-
-  return <ItemDetail product={product} />;
+  return (
+    product ? ( <ItemDetail product={product} />) : (<NotFoundProduct />)
+  );
 }
 
 export default ItemDetailContainer;

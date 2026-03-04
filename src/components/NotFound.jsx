@@ -1,8 +1,11 @@
+import { Container, Typography} from "@mui/material";
+
 function NotFound() {
   return (
-    <div>
-      <h1>404 NOT FOUND</h1>
-    </div>
+    <Container maxWidth="md" sx={{ mt: 4, minHeight: "90vh" }}>
+      <Typography variant="h4">Oops, wrong place😵‍💫</Typography>
+      
+    </Container>
   );
 }
 

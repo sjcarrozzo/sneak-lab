@@ -14,9 +14,9 @@ function ItemList({ productsList }) {
     <>
       <Typography
         variant="h3"
-        sx={{ fontWeight: 500, mb: 2, pt: 5}}
+        sx={{ fontWeight: 500, mb: 2, pt: 5, ml: 3}}
       >
-        {filter ? filter: 'all products'}
+        {filter ? filter: 'Products'}
       </Typography>
 
       <Grid container spacing={2}>
