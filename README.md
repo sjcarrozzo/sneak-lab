@@ -31,7 +31,7 @@ SneakLab es una aplicación web de catálogo de productos desarrollada con **Rea
 1. Clona el repositorio:
 
 ```bash
-git clone https://github.com/sjcarrozzo/sneak-lab
+git clone https://github.com/sjcarrozzo/sneak-lab.git
 cd sneak-lab
 ```
 
