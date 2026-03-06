@@ -24,7 +24,7 @@ function ItemCount({ product }) {
 
   const handleClickAddToCart = () => {
     addToCart({ ...product, count: itemCount });
-    toast.success('Producto added to cart',{duration: 1000, style: {background: "#e7e2e2fb"}})
+    toast.success('Product added to cart',{duration: 1000, style: {background: "#e7e2e2fb"}})
   };
 
   return (

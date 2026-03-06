@@ -9,20 +9,14 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Box from "@mui/material/Box";
-import ListSubheader from "@mui/material/ListSubheader";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { styled } from "@mui/material/styles";
 
 //local imports
 import CartWidget from "./CartWidget";
 import AppLogo from "./AppLogo";
 import MobileDrawer from "./MobileDrawer";
 import { fetchAllCategories } from "../firebase/db";
-
-const StyledListHeader = styled(ListSubheader)({
-  backgroundImage: "var(--Paper-overlay)",
-});
 
 export default function Navbar() {
   //manage toggle mobile menu state

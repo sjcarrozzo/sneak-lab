@@ -11,6 +11,7 @@ function CartProvider({ children }) {
 
   const resetCart = ()=>{
     setCart([])
+    toast.success('Cart deleted',{duration: 1000, style: {background: "#e7e2e2fb"}})
   }
 
   const addToCart = (product) => {

@@ -17,9 +17,10 @@ SneakLab es una aplicación web de catálogo de productos desarrollada con **Rea
 
 ## 📦 Funcionalidades
 
-- Visualización de productos desde Firestore.
 - Navegación fluida entre páginas (Home, Productos, Detalles).
 - Notificaciones al agregar, actualizar o eliminar productos al carrito.
+- Visualizacion de carrito.
+- Visualización del detalle de los productos.
 - Interfaz moderna y responsiva con Material UI.
 - Manejo de errores y estados de carga.
 
@@ -30,8 +31,8 @@ SneakLab es una aplicación web de catálogo de productos desarrollada con **Rea
 1. Clona el repositorio:
 
 ```bash
-git clone https://github.com/tu-usuario/sneaklab.git
-cd sneaklab
+git clone https://github.com/sjcarrozzo/sneak-lab
+cd sneak-lab
 ```
 
 2. Instala dependencias:
